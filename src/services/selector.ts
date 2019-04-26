@@ -205,7 +205,11 @@ export function cleverSelect() {
       .sort((a, b) => a.start.isBefore(b.start) ? 1 : -1)
 
     if (selections && selections.length > 0) {
-      return selections[0]
+      const start_pos = new vscode.Position(selections[0].start.line, selections[0].start.character);
+      const end_pos = new vscode.Position(selections[0].end.line, selections[0].end.character - 1);
+
+      return new vscode.Selection(start_pos, end_pos)
+      // return selections[0]
     }
     return s
   })
